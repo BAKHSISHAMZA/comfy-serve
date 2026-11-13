@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+fake_comfy_data/
+*.sqlite*
+.venv/

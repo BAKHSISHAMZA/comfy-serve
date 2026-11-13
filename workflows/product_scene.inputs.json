@@ -1,0 +1,13 @@
+{
+  "about": "Paints a scene around a product. Send the product already placed on a transparent canvas (PNG with alpha): ComfyUI's LoadImage turns transparent pixels into the mask, so the model paints only where the product is not.",
+  "inputs": {
+    "image":      {"node": "2", "field": "image",     "type": "image"},
+    "prompt":     {"node": "3", "field": "text",      "type": "text"},
+    "negative":   {"node": "4", "field": "text",      "type": "text",  "default": "text, watermark, logo, people, blurry, deformed, extra objects on the product"},
+    "seed":       {"node": "6", "field": "seed",      "type": "int",   "default": "random"},
+    "steps":      {"node": "6", "field": "steps",     "type": "int",   "default": 30},
+    "cfg":        {"node": "6", "field": "cfg",       "type": "float", "default": 6.0},
+    "checkpoint": {"node": "1", "field": "ckpt_name", "type": "text",  "default": "sd_xl_base_1.0.safetensors"}
+  },
+  "outputs": ["8"]
+}
