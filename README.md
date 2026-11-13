@@ -76,7 +76,7 @@ One job runs at a time, because there is one GPU; ComfyUI would queue the second
 
 Paints a scene **around** a product without drawing the product. Send the product already placed on a transparent canvas: ComfyUI's `LoadImage` turns the transparent area into the mask, and `InpaintModelConditioning` with `noise_mask` keeps the sampler off the product. Core ComfyUI nodes only; the model is any SDXL checkpoint (default `sd_xl_base_1.0.safetensors`).
 
-It is the scene stage of [product-lock](https://github.com/BAKHSISHAMZA/product-lock), which then pastes the original product pixels back and checks the colour difference.
+It is the scene stage of product-lock, a separate pipeline that then pastes the original product pixels back and checks the colour difference.
 
 ## Tests: every one passes or fails, nothing judged by eye
 
