@@ -96,6 +96,14 @@ python -m pytest -q tests
 
 ## Measured on real hardware
 
+To measure your own GPU, keep ComfyUI and comfy-serve running and, in a second window:
+
+```
+python bench.py --checkpoint <your SDXL checkpoint file> [--image your_product_cutout.png]
+```
+
+It sends 10 jobs, saves the images to `bench_out/`, and prints a row for this table. The first job also loads the checkpoint, so it is reported separately; GPU memory is the whole GPU's use, so the idle figure before the first job (the desktop and other apps) is printed next to the peak. On Windows this also saves you from curl's quoting rules in Command Prompt.
+
 | GPU | Workflow | Resolution | Steps | Render time per image | Peak VRAM |
 |---|---|---|---|---|---|
 | RTX 5060 (8 GB) | product_scene, SDXL | 1024 × 1024 | 30 | to be measured | to be measured |
@@ -111,6 +119,7 @@ comfy_serve/
   workflows.py  named-input maps and validation
 workflows/      product_scene.json + product_scene.inputs.json
 tests/          fake_comfy.py + end-to-end tests
+bench.py        measure render time and GPU memory on your own GPU
 ```
 
 MIT licence.

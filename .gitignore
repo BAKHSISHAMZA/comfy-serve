@@ -5,3 +5,4 @@ data/
 fake_comfy_data/
 *.sqlite*
 .venv/
+bench_out/
