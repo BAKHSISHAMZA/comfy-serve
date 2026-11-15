@@ -35,6 +35,8 @@ One job runs at a time, because there is one GPU; ComfyUI would queue the second
    python -m comfy_serve --comfy http://127.0.0.1:8188 --port 8199
    ```
 
+   The ComfyUI desktop app listens on port 8000 instead, so there use `--comfy http://127.0.0.1:8000`.
+
 3. Send a job:
 
    ```
@@ -76,7 +78,7 @@ One job runs at a time, because there is one GPU; ComfyUI would queue the second
 
 Paints a scene **around** a product without drawing the product. Send the product already placed on a transparent canvas: ComfyUI's `LoadImage` turns the transparent area into the mask, and `InpaintModelConditioning` with `noise_mask` keeps the sampler off the product. Core ComfyUI nodes only; the model is any SDXL checkpoint (default `sd_xl_base_1.0.safetensors`).
 
-It is the scene stage of product-lock, a separate pipeline that then pastes the original product pixels back and checks the colour difference.
+The saved image still passes the product through the VAE, so its pixels shift slightly: a mean colour difference of ΔE 2.3 inside the product on the benchmark runs. That is why this is only the scene stage of product-lock, a separate pipeline that then pastes the original product pixels back and checks the colour difference.
 
 ## Tests: every one passes or fails, nothing judged by eye
 
@@ -106,7 +108,9 @@ It sends 10 jobs, saves the images to `bench_out/`, and prints a row for this ta
 
 | GPU | Workflow | Resolution | Steps | Render time per image | Peak VRAM |
 |---|---|---|---|---|---|
-| RTX 5060 (8 GB) | product_scene, SDXL | 1024 × 1024 | 30 | to be measured | to be measured |
+| RTX 5060 (8 GB), ComfyUI 0.28 desktop app, Windows | product_scene, RealVisXL V5.0 (SDXL) | 1024 × 1024 | 30 | **14.9 s** median (first job 52.9 s: it also loads the model) | **7.5 GB** in use at peak, 1.1 GB of it the Windows desktop |
+
+10 of 10 jobs done, 0 failed, measured with `bench.py` on 15 November 2026. Jobs 2–10 took between 14.8 and 15.0 s.
 
 ## Layout
 
